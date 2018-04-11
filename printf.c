@@ -589,9 +589,9 @@ static size_t _vsnprintf(char* buffer, size_t buffer_len, const char* format, va
 int printf(const char* format, ...)
 {
   va_list va;
-  va_start(va, format);
   char buffer[PRINTF_PRINTF_BUFFER_SIZE];
-  size_t ret = _vsnprintf(buffer, PRINTF_PRINTF_BUFFER_SIZE, format, va);
+  va_start(va, format);
+  const size_t ret = _vsnprintf(buffer, PRINTF_PRINTF_BUFFER_SIZE, format, va);
   va_end(va);
   for (size_t i = 0U; i < ret; ++i) {
     _putchar(buffer[i]);
@@ -605,7 +605,7 @@ int sprintf(char* buffer, const char* format, ...)
 {
   va_list va;
   va_start(va, format);
-  size_t ret = _vsnprintf(buffer, (size_t)-1, format, va);
+  const size_t ret = _vsnprintf(buffer, (size_t)-1, format, va);
   va_end(va);
   return (int)ret;
 }
@@ -615,7 +615,7 @@ int snprintf(char* buffer, size_t count, const char* format, ...)
 {
   va_list va;
   va_start(va, format);
-  size_t ret = _vsnprintf(buffer, count, format, va);
+  const size_t ret = _vsnprintf(buffer, count, format, va);
   va_end(va);
   return (int)ret;
 }
